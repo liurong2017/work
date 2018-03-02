@@ -17,7 +17,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <select id="getByName" parameterType="java.lang.String" resultType="BaseResultMap">
+  <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT * from product b where b.`name`=#{name}
   </select>
   <update id="updateStock">

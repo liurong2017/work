@@ -18,7 +18,7 @@
     <result column="address2" jdbcType="VARCHAR" property="address2" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <select id="getByWechat" parameterType="java.lang.String" resultType="BaseResultMap">
+  <select id="getByWechat" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT * from custom b where b.wechat_name=#{wechatName}
   </select>
 </mapper>

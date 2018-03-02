@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.work.home.dao.mapper.CustomMapper">
+  <resultMap id="BaseResultMap" type="cn.work.home.dao.model.Custom">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="wechat_name" jdbcType="VARCHAR" property="wechatName" />
+    <result column="wechat_code" jdbcType="VARCHAR" property="wechatCode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="address1" jdbcType="VARCHAR" property="address1" />
+    <result column="address2" jdbcType="VARCHAR" property="address2" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <select id="getByWechat" parameterType="java.lang.String" resultType="BaseResultMap">
+    SELECT * from custom b where b.wechat_name=#{wechatName}
+  </select>
+</mapper>

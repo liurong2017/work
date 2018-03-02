@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.work.home.dao.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="cn.work.home.dao.model.Product">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="classify_id" jdbcType="BIGINT" property="classifyId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <select id="getByName" parameterType="java.lang.String" resultType="BaseResultMap">
+    SELECT * from product b where b.`name`=#{name}
+  </select>
+  <update id="updateStock">
+    UPDATE product SET stock = stock ${flag} #{stock} where id=#{id}
+  </update>
+</mapper>

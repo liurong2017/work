@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.work.home.dao.mapper.OrderformMapper">
+  <resultMap id="BaseResultMap" type="cn.work.home.dao.model.Orderform">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cid" jdbcType="BIGINT" property="cid" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pprice" jdbcType="DECIMAL" property="pprice" />
+    <result column="sprice" jdbcType="DECIMAL" property="sprice" />
+    <result column="tprice" jdbcType="DECIMAL" property="tprice" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="totalPrice" jdbcType="DECIMAL" property="totalprice" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>

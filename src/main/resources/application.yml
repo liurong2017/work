@@ -1,0 +1,51 @@
+spring:  
+  profiles:  
+    active: dev 
+---  
+spring:  
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/work?allowMultiQueries=true
+    max-active: 300
+    max-idle: 10
+    min-idle: 8
+    username: root
+    password: 147258369
+    test-on-borrow: true
+    test-on-return: false
+    test-while-idle: true
+    validation-query: select 1 
+    filters: stat
+    max-wait: 60000
+    pool-prepared-statements: true
+  thymeleaf:
+      cache: false
+#  resources:
+#    chain:
+#      strategy:
+#        content:
+#          enabled: true
+  devtools:
+    restart:
+      additional-paths: src/main/java,src/main/resources
+server:
+  port: 8888
+logging:
+  level:
+    ROOT: info
+    tk:
+      mybatis: TRACE
+mybatis:
+  type-aliases-package: cn.work.home.dao.model,cn.work.home.dao.mapper
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/*/*.xml
+mapper:
+  mappers:
+    - cn.work.home.util.WorkMapper
+  not-empty: false
+  identity: MYSQL
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

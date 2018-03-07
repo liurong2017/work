@@ -6,19 +6,37 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="cid" jdbcType="BIGINT" property="cid" />
-    <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="cname" jdbcType="VARCHAR" property="cname" />
-    <result column="pname" jdbcType="VARCHAR" property="pname" />
-    <result column="pprice" jdbcType="DECIMAL" property="pprice" />
-    <result column="sprice" jdbcType="DECIMAL" property="sprice" />
-    <result column="tprice" jdbcType="DECIMAL" property="tprice" />
-    <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="totalPrice" jdbcType="DECIMAL" property="totalprice" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="express" jdbcType="VARCHAR" property="express" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from order_form o where o.id =#{id}
+  </select>
+  <update id="updateExpress" >
+     UPDATE order_form SET express =#{express} where id=#{id}
+   </update>
+
+  <select id="selectOrder" parameterType="cn.work.home.vo.OrderformVo" resultType="cn.work.home.vo.OrderShowVo">
+    SELECT d.oid ,f.status,f.source,c.name as cname,c.mobile,
+    p.name as pname,d.num,d.total_price as price,f.add_time as time,f.remark ,f.express  from order_detail d
+    LEFT JOIN order_form f on f.id=d.oid
+    LEFT JOIN product p on p.id=d.pid
+    LEFT JOIN custom c on c.id=f.cid
+    <where>
+      1=1
+      <if test="cname!=null"> and c.`name` LIKE CONCAT('%', #{cname},'%') </if>
+      <if test="mobile!=null"> and c.mobile like CONCAT('%', #{mobile},'%') </if>
+      <if test="pname!=null"> and p.`name` like CONCAT('%', #{pname},'%') </if>
+      <if test="source!=null">and f.source = #{source}</if>
+      <if test="timeStart!=null">and f.add_time &gt;= #{timeStart}	</if>
+      <if test="timeEnd!=null">and f.add_time &lt;= #{timeEnd}	</if>
+    </where>
+  </select>
 </mapper>

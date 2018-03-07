@@ -7,7 +7,9 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="brand_Name" jdbcType="VARCHAR" property="brandName" />
     <result column="classify_id" jdbcType="BIGINT" property="classifyId" />
+    <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -18,9 +20,44 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT * from product b where b.`name`=#{name}
+    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name from product p
+    LEFT JOIN brand b on b.id =p.brand_id
+    LEFT  join classify c on c.id =p.classify_id
+     where p.`name`=#{name}
   </select>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name from product p
+     LEFT JOIN brand b on b.id =p.brand_id
+    LEFT  join classify c on c.id =p.classify_id
+     where p.id=#{id}
+  </select>
+  <select id="getByIds" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name from product p
+    LEFT JOIN brand b on b.id =p.brand_id
+    LEFT  join classify c on c.id =p.classify_id
+    where p.id IN (${ids})
+  </select>
+
+
+
   <update id="updateStock">
-    UPDATE product SET stock = stock ${flag} #{stock} where id=#{id}
+    UPDATE product SET
+    <if test="flag==0">stock = stock - #{stock} where id=#{id}</if>
+    <if test="flag==1"> stock = stock + #{stock} where id=#{id}</if>
   </update>
+
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name  from product p
+    LEFT JOIN brand b on b.id =p.brand_id
+    LEFT  join classify c on c.id =p.classify_id
+    <where>
+      1=1
+      <if test="brandId!=null"> and  p.brand_id =#{brandId}</if>
+      <if test="classifyId!=null"> and p.classify_id=#{classifyId}</if>
+      <if test="status !=null"> and p.status=#{status}</if>
+      <if test="name !=null"> and p.`name` like CONCAT('%', #{name},'%')</if>
+    </where>
+
+  </select>
+
 </mapper>

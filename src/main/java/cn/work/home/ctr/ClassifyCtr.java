@@ -39,6 +39,7 @@ public class ClassifyCtr extends BaseController {
             Boolean result= classifyService.add(classify);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -50,6 +51,7 @@ public class ClassifyCtr extends BaseController {
             Boolean result= classifyService.update(classify);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -70,6 +72,12 @@ public class ClassifyCtr extends BaseController {
     public ModelMap getAll(){
         List<Classify> list=classifyService.getAll();
         return retResult("200","200",list);
+    }
+
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @ResponseBody
+    public ModelMap getById(Long id){
+        return retResult("200","200",classifyService.getById(id));
     }
 
 }

@@ -35,7 +35,7 @@ public class ClassifyService {
 
     @Transactional
     public Boolean update(Classify classify)throws  Exception{
-        Classify old=classifyMapper.selectByPrimaryKey(classify.getId());
+        Classify old=classifyMapper.getById(classify.getId());
         if(old==null){
             throw new Exception("分类不存在");
         }
@@ -46,14 +46,15 @@ public class ClassifyService {
     public List<Classify> getList(String name,Integer pageNo,Integer pageSize){
         PageHelper.startPage(pageNo,pageSize);
         if(!StringUtils.isEmpty(name)){
-            Classify search=new Classify();
-            search.setName(name);
-            return  classifyMapper.select(search);
+            return  classifyMapper.getLikeName(name);
         }
         return classifyMapper.selectAll();
     }
 
     public List<Classify> getAll(){
         return classifyMapper.selectAll();
+    }
+    public Classify getById(Long id){
+        return classifyMapper.getById(id);
     }
 }

@@ -112,14 +112,14 @@
 					</div><!-- #sidebar-shortcuts -->
 
 					<ul class="nav nav-list">
-						<li >
+						<li>
 							<a href="index.html">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 首页 </span>
 							</a>
 						</li>
 
-						<li class="active">
+						<li>
 							<a href="brand.html">
 								<i class="icon-picture"></i>
 								<span class="menu-text"> 品牌管理 </span>
@@ -177,7 +177,6 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">品牌管理</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -193,54 +192,85 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								品牌管理
+								<a href="custom.html">客户管理</a>
 								<small>
 									<i class="icon-double-angle-right"></i>
-									 查看
+									 下单
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-				<div class="row">
-			<div><div style="padding:10px" >		
-			<div class="col-xs-12">
-			<div class="col-sm-6" style="text-align: left;">
-					<button class="btn btn-xs btn-primary" onclick="addBrand()">
-						<i class="icon-plus-sign icon-white"></i>添加
-					</button>&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
-			<div class="col-sm-6" style="text-align: left;">
-					<label >品牌名称：
-						<input type="text" style="width: 85px" id="BrandNameS" value="">&nbsp;&nbsp;</label>
-					&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchBrands()">
-						<i class="icon-search icon-white"></i>查询
-					</button>				
-			</div>
-			</div>
-		</div>	
-		<div>
-		<table id="BrandTable" class="table table-striped table-bordered table-hover" style="width:99%;" >
-		<thead>
-			<tr>
-				<th>品牌名称</th>
-				<th>品牌级别</th>
-				<th>备注</th>	
-				<th>操作</th>
-			</tr>
-		</thead>
-		 <tbody id="brandList">			
-		</tbody> 
-	</table>
-	</div>
-	</div>
+						<div>
+							<!--
+                            	作者：1059487328@qq.com
+                            	时间：2018-03-07
+                            	描述：订单基本信息
+                            -->
+                            <div style="padding:10px" >		
+								<div class="col-xs-12">
+									<input type="hidden" id="addOrder_cid" value=""/>
+									<p>订单来源:&nbsp;&nbsp;<input class="addOrder"  id="addOrder_source" placeholder="微信、淘宝、QQ..." value="">
+									<p>客户姓名:&nbsp;&nbsp;<input class="addOrder" readonly="readonly" id="addOrder_cname" value="">
+									<p>收货地址:&nbsp;&nbsp;
+										<select id="address_btn" onchange="getAdress()">
+											<option value="addOrder_address1" selected="selected">地址1</option>
+											<option value="addOrder_address2">地址2</option>
+										</select>
+									</p>
+									<p>详细地址:&nbsp;&nbsp;<textarea class="addOrder"  id="addOrder_address" value=""></textarea>
+										<input type="hidden" class="addOrder"  id="addOrder_address1"  value=""></input>
+										<input type="hidden"  class="addOrder" id="addOrder_address2" value=""></input>
+									</p>
+									<p>备注信息:&nbsp;&nbsp;<textarea  class="addOrder" id="addOrder_remark" value=""></textarea></p>			
+								</div>
+							</div>
+						</div>
+						<!--
+                            	作者：1059487328@qq.com
+                            	时间：2018-03-07
+                            	描述：用户列表
+                            -->
+							
+						<div><div style="padding:10px" >		
+							<div class="col-xs-12" style="padding: 10px;">
+							<p>	<button class="btn btn-xs btn-info" onclick="openSearch()">
+									<i class="icon-search icon-white"></i>查询商品
+								</button>
+								
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+								<button class="btn btn-xs btn-success" onclick="saveOrder()">
+									<i class="icon-lock icon-white"></i>保存订单
+								</button>
+								
+								</p>
+							</div>
+						</div>	
+						<div>
+						<table class="table table-striped table-bordered table-hover" style="width:99%;" >
+						<thead>
+							<tr>
+								<th>名称</th>	
+								<th>数量</th>
+								<th>总价</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						 <tbody id="addOrder_productList">
+						 	
+						</tbody> 
+					</table>
+					</div>
+					</div>
+						
 			</div><!-- /.main-container-inner -->
 
 		</div><!-- /.main-container -->
 <!--
 	作者：1059487328@qq.com
-	时间：2018-03-05
-	描述：添加品牌对话框
+	时间：2018-03-06
+	描述：
 -->
-<div id="addBrand_dia" class="modal fade" tabindex="-1">
+<div id="search_product_dia" class="modal fade" tabindex="-1">
 <div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header no-padding">
@@ -248,61 +278,50 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 								<span class="white">&times;</span>
 							</button>
-							添加
+							查询商品
 						</div>
 					</div>
 					<div class="modal-body padding-12" >
-						<p style="line-height: 20px;" >品牌名称：&nbsp;&nbsp;<input id ="addBrand_name" value="" /></p>
-						<p>品牌级别：&nbsp;&nbsp;<input id="addBrand_level" value="" /></p>
-						<p>品牌备注：&nbsp;&nbsp;<input id="addBrand_remark" value="" /></p>
-						
+						<p>
+							<input type="text" placeholder="产品名称" style="width: 85px" id="ProductNameS" value="">&nbsp;&nbsp;
+								&nbsp;&nbsp;
+								<select id="ProductBrandS"></select>&nbsp;&nbsp;&nbsp;
+								<select id="ProductClassS"></select>
+								<button class="btn btn-xs btn-info" onclick="searchProducts()">
+									<i class="icon-search icon-white"></i>查询
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-xs btn-success" onclick="addMore()">
+									<i class="icon-plus icon-white"></i>批量添加
+								</button>
+							
+						</p>
+						<table class="table table-striped table-bordered table-hover" style="width:99%;" >
+							<thead>
+								<tr>
+									<th>选择</th>	
+									<th>名称</th>	
+									<th>库存</th>
+									<th>建议售价</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							 <tbody id="productList">	
+							 	
+							</tbody> 
+						</table>
 					</div>
 					<div class="modal-footer no-margin-top">
-						<button class="btn btn-sm btn-info pull-right" onclick="addBrand_dia_save()">
-							<i class="icon-save"></i>
-							Save
-						</button>
+						<button class="btn btn-xs btn-info" onclick="closeDia('search_product_dia')">
+									<i class="icon-search icon-white"></i>Close
+								</button>
+					</div>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 </div>
-<!--
-	作者：1059487328@qq.com
-	时间：2018-03-05
-	描述：修改窗口
--->
-<div id="updBrand_dia" class="modal fade" tabindex="-1">
-<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header no-padding">
-						<div class="table-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								<span class="white">&times;</span>
-							</button>
-							修改
-						</div>
-					</div>
-					<div class="modal-body padding-12" >
-						<input type="hidden" id="updBrand_id"  value=""/>
-						<p style="line-height: 20px;" >品牌名称：&nbsp;&nbsp;
-							<input readonly="readonly" id ="updBrand_name" value="" /></p>
-						<p>品牌级别：&nbsp;&nbsp;<input id="updBrand_level" value="" /></p>
-						<p>品牌备注：&nbsp;&nbsp;<input id="updBrand_remark" value="" /></p>
-					</div>
-					<div class="modal-footer no-margin-top">
-						<button class="btn btn-sm btn-info pull-right" onclick="updBrand_dia_save()">
-							<i class="icon-save"></i>
-							Save
-						</button>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-</div>
-
-
-		
-		<script src="assets/js/jquery-2.0.3.min.js"></script>
-		<script src="js/brand.js"></script>
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="js/add_order.js"></script>
 
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
@@ -318,7 +337,6 @@
 
 		<!-- inline scripts related to this page -->
 	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
-
 
 </body>
 </html>

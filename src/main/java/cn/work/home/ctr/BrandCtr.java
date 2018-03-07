@@ -68,6 +68,7 @@ public class BrandCtr extends BaseController {
             Boolean result= brandService.addBrand(brand);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -78,6 +79,7 @@ public class BrandCtr extends BaseController {
             Boolean result= brandService.updateBrand(brand);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }

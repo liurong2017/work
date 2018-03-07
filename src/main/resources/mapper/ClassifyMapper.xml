@@ -12,4 +12,11 @@
   <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT * from classify b where b.`name`=#{name}
   </select>
+  <select id="getLikeName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * from classify b where b.`name` like CONCAT('%', #{name},'%')
+  </select>
+
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from classify b where b.id=#{id}
+  </select>
 </mapper>

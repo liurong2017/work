@@ -11,8 +11,12 @@ public class Product {
 
     @Column(name = "brand_id")
     private Long brandId;
+    @Transient
+    private String brandName;
     @Column(name = "classify_id")
     private Long classifyId;
+    @Transient
+    private String classifyName;
 
     private String name;
 
@@ -31,8 +35,37 @@ public class Product {
     @Column(name = "add_time")
     private Date addTime;
 
+
     private String remark;
 
+
+    @Transient
+    private BigDecimal cost;//进货成本
+
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getClassifyName() {
+        return classifyName;
+    }
+
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
+    }
 
     public Long getClassifyId() {
         return classifyId;

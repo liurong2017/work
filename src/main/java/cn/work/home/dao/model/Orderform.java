@@ -1,32 +1,22 @@
 package cn.work.home.dao.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
+@Table(name = "order_form")
 public class Orderform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long cid;
+    /**
+     * + 收入；- 支出
+     */
+    private String type;
 
-    private Long pid;
+    private Integer cid;
 
     private String cname;
-
-    private String pname;
-
-    private BigDecimal pprice;
-
-    private BigDecimal sprice;
-
-    private BigDecimal tprice;
-
-    private Integer num;
-
-    @Column(name = "totalPrice")
-    private BigDecimal totalprice;
 
     private String address;
 
@@ -37,49 +27,59 @@ public class Orderform {
 
     private String status;
 
+    private String express;
+
     private String remark;
 
-    /**
-     * @return id
-     */
+
+    public String getExpress() {
+        return express;
+    }
+
+    public void setExpress(String express) {
+        this.express = express;
+    }
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
+     * 获取+ 收入；- 支出
+     *
+     * @return type - + 收入；- 支出
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * 设置+ 收入；- 支出
+     *
+     * @param type + 收入；- 支出
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
      * @return cid
      */
-    public Long getCid() {
+    public Integer getCid() {
         return cid;
     }
 
     /**
      * @param cid
      */
-    public void setCid(Long cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
-    /**
-     * @return pid
-     */
-    public Long getPid() {
-        return pid;
-    }
-
-    /**
-     * @param pid
-     */
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
 
     /**
      * @return cname
@@ -93,90 +93,6 @@ public class Orderform {
      */
     public void setCname(String cname) {
         this.cname = cname;
-    }
-
-    /**
-     * @return pname
-     */
-    public String getPname() {
-        return pname;
-    }
-
-    /**
-     * @param pname
-     */
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
-
-    /**
-     * @return pprice
-     */
-    public BigDecimal getPprice() {
-        return pprice;
-    }
-
-    /**
-     * @param pprice
-     */
-    public void setPprice(BigDecimal pprice) {
-        this.pprice = pprice;
-    }
-
-    /**
-     * @return sprice
-     */
-    public BigDecimal getSprice() {
-        return sprice;
-    }
-
-    /**
-     * @param sprice
-     */
-    public void setSprice(BigDecimal sprice) {
-        this.sprice = sprice;
-    }
-
-    /**
-     * @return tprice
-     */
-    public BigDecimal getTprice() {
-        return tprice;
-    }
-
-    /**
-     * @param tprice
-     */
-    public void setTprice(BigDecimal tprice) {
-        this.tprice = tprice;
-    }
-
-    /**
-     * @return num
-     */
-    public Integer getNum() {
-        return num;
-    }
-
-    /**
-     * @param num
-     */
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
-    /**
-     * @return totalPrice
-     */
-    public BigDecimal getTotalprice() {
-        return totalprice;
-    }
-
-    /**
-     * @param totalprice
-     */
-    public void setTotalprice(BigDecimal totalprice) {
-        this.totalprice = totalprice;
     }
 
     /**

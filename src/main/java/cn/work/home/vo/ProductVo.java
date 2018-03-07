@@ -12,11 +12,56 @@ import java.math.BigDecimal;
  */
 public class ProductVo extends BaseSearchVo {
 
+    private Long id;
     private Long brandId;
     private Long classifyId;
     private String name;
     private Integer status;
     private Integer level;
+    private String flag;
+    private Integer stock;
+    private  BigDecimal marketPrice;
+    private  String remark;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public BigDecimal getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(BigDecimal marketPrice) {
+        this.marketPrice = marketPrice;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Long getBrandId() {
         return brandId;

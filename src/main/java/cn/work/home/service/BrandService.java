@@ -26,26 +26,27 @@ public class BrandService {
 
 
     public Brand getById(Long id){
-
-        return  brandMapper.selectByPrimaryKey(id);
+        return  brandMapper.getById(id);
     }
 
     public Brand getByName(String name){
 
-        return  brandMapper.getByName(name);
+        return  brandMapper.getOneByName(name);
     }
 
     public List<Brand> getList(BrandVo brandVo){
         PageHelper.startPage(brandVo.getPageNo(),brandVo.getPageSize());
-        Brand search=new Brand();
-        BeanUtils.copyProperties(brandVo,search);
-        return brandMapper.select(search);
+        if(brandVo.getName()!=null){
+            return  brandMapper.getListByName(brandVo.getName());
+        }
+        return brandMapper.selectAll();
+
 
     }
 
     @Transactional
     public Boolean addBrand(Brand brand)throws  Exception{
-        Brand old=brandMapper.getByName(brand.getName());
+        Brand old=brandMapper.getOneByName(brand.getName());
         if(old!=null){
             throw new Exception("品牌已经存在");
         }
@@ -54,7 +55,7 @@ public class BrandService {
     }
     @Transactional
     public Boolean updateBrand(Brand brand)throws  Exception{
-        Brand old=brandMapper.selectByPrimaryKey(brand.getId());
+        Brand old=brandMapper.getById(brand.getId());
         if(old==null){
             throw new Exception("品牌不存在");
         }

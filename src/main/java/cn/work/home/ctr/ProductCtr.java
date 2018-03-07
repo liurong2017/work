@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -38,6 +39,7 @@ public class ProductCtr extends BaseController {
             Boolean result= productService.add(product);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -53,11 +55,12 @@ public class ProductCtr extends BaseController {
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ResponseBody
-    public ModelMap update(Product product){
+    public ModelMap update(ProductVo product){
         try {
             Boolean result= productService.update(product);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -65,17 +68,35 @@ public class ProductCtr extends BaseController {
     @RequestMapping(value = "/updateStock",method = RequestMethod.POST)
     @ResponseBody
     public ModelMap updateStock(
-            @RequestParam(value = "id",required = true)
+            @RequestParam(value = "id")
             Long id,
-            @RequestParam(value = "flag",required = true)
+            @RequestParam(value = "flag")
             String flag,
-            @RequestParam(value = "stock",required = true)
-            Integer stock){
+            @RequestParam(value = "stock")
+            Integer stock,
+            @RequestParam(value = "cost")
+            BigDecimal cost,
+            @RequestParam(value = "remark")
+            String remark
+            ){
         try {
-            Boolean result= productService.updateStock(id,flag,stock);
+            Boolean result= productService.updateStock(id,flag,stock,cost,remark);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
+    }
+
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @ResponseBody
+    public  ModelMap getById(Long id){
+        return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,productService.getById(id));
+    }
+
+    @RequestMapping(value = "/getByIds",method = RequestMethod.GET)
+    @ResponseBody
+    public  ModelMap getByIds(String ids){
+        return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,productService.getByIds(ids));
     }
 }

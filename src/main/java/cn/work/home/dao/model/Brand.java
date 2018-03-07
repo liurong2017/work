@@ -1,8 +1,10 @@
 package cn.work.home.dao.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-public class Brand {
+@Table(name = "brand")
+public class Brand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

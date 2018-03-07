@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.work.home.dao.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="cn.work.home.dao.model.OrderDetail">
+    <!--
+      WARNING - @mbg.generated
+    -->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <id column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="oid" jdbcType="BIGINT" property="oid" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+  </resultMap>
+    <select id="getByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT * FROM order_detail d where d.oid=#{oid}
+    </select>
+</mapper>

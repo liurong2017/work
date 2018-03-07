@@ -6,8 +6,12 @@ import cn.work.home.service.OrderService;
 import cn.work.home.util.BaseSearchVo;
 import cn.work.home.util.PageResult;
 import cn.work.home.util.ResultCode;
+import cn.work.home.vo.OrderShowVo;
+import cn.work.home.vo.OrderVo;
 import cn.work.home.vo.OrderformVo;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,19 +27,23 @@ import java.util.List;
  * @Description:
  */
 @Controller
+@RequestMapping(value = "/order")
 public class OrderCtr extends BaseController {
 
     @Autowired
     private OrderService orderService;
 
+    private Logger logger = LoggerFactory.getLogger(OrderCtr.class);
+
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public ModelMap add(Orderform orderform){
+    public ModelMap add(OrderVo orderVo){
         try {
-            Boolean result= orderService.add(orderform);
+            Boolean result= orderService.add(orderVo);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
@@ -43,19 +51,40 @@ public class OrderCtr extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public ModelMap getList(OrderformVo orderformVo){
-        List<Orderform> list=orderService.getList(orderformVo);
-        PageInfo<Orderform> pageInfo = new PageInfo<>(list);
+        List<OrderShowVo> list=orderService.getList(orderformVo);
+        PageInfo<OrderShowVo> pageInfo = new PageInfo<>(list);
         PageResult pageResult = new PageResult(orderformVo.getPageSize(),orderformVo.getPageNo(), pageInfo.getList(),pageInfo.getPages(), pageInfo.getTotal(), null);
         return retResult("200","200",pageResult);
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
     @ResponseBody
-    public ModelMap update(Orderform orderform){
+    public ModelMap getById(Long id){
+        return retResult("200","200",orderService.getbyId(id));
+    }
+
+
+
+    @RequestMapping(value = "/updateExpress",method = RequestMethod.POST)
+    @ResponseBody
+    public ModelMap updateExpress(Long id,String express ){
         try {
-            Boolean result= orderService.update(orderform);
+            Boolean result= orderService.updateExpress(id,express);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
+            return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/returnOrder",method = RequestMethod.POST)
+    @ResponseBody
+    public ModelMap returnOrder(Long id,String remark ){
+        try {
+            Boolean result= orderService.returnOrder(id,remark);
+            return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }

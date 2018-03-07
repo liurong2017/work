@@ -5,13 +5,20 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   
-  <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-   SELECT * from brand b WHERE b.`name`=#{name}
+  <select id="getOneByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+   SELECT * from brand b WHERE b.`name` = #{name}
+  </select>
+
+  <select id="getListByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * from brand b WHERE b.`name` LIKE  CONCAT('%', #{name},'%')
+  </select>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from brand b WHERE b.id=#{id}
   </select>
 </mapper>

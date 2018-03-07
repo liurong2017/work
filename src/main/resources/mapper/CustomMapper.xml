@@ -19,6 +19,22 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <select id="getByWechat" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT * from custom b where b.wechat_name=#{wechatName}
+    SELECT * from custom b where b.wechat_code=#{wechatName}
+  </select>
+
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from custom b where b.id=#{id}
+  </select>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="cn.work.home.dao.model.Custom">
+       SELECT * from custom c 
+       <where>
+         1=1 
+         <if test="name!=null"> and c.name like CONCAT('%', #{name},'%') </if>
+         <if test="source!=null">and  c.source =#{source}</if>
+         <if test="mobile!=null">and  c.mobile= #{mobile} </if>
+         <if test="wechatName!=null">and  c.wechat_name like CONCAT('%', #{wechatName},'%') </if>
+         <if test="wechatCode!=null">and  c.wechat_code like CONCAT('%', #{wechatCode},'%') </if>
+       </where>
+
   </select>
 </mapper>

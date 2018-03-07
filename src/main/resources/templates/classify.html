@@ -10,38 +10,14 @@
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-
-		<!-- page specific plugin styles -->
-
-		<!-- fonts -->
-
-		<!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />-->
-
-		<!-- ace styles -->
 
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
-		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- inline styles related to this page -->
-
-		<!-- ace settings handler -->
 
 		<script src="assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-		<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
 	</head>
 
 	<body>
@@ -119,13 +95,13 @@
 							</a>
 						</li>
 
-						<li class="active">
+						<li>
 							<a href="brand.html">
 								<i class="icon-picture"></i>
 								<span class="menu-text"> 品牌管理 </span>
 							</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="classify.html">
 								<i class="icon-desktop"></i>
 								<span class="menu-text"> 分类管理 </span>
@@ -175,9 +151,8 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="#">分类管理</a>
 							</li>
-							<li class="active">品牌管理</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -193,54 +168,53 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								品牌管理
+								分类管理
 								<small>
 									<i class="icon-double-angle-right"></i>
 									 查看
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-				<div class="row">
-			<div><div style="padding:10px" >		
-			<div class="col-xs-12">
-			<div class="col-sm-6" style="text-align: left;">
-					<button class="btn btn-xs btn-primary" onclick="addBrand()">
-						<i class="icon-plus-sign icon-white"></i>添加
-					</button>&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
-			<div class="col-sm-6" style="text-align: left;">
-					<label >品牌名称：
-						<input type="text" style="width: 85px" id="BrandNameS" value="">&nbsp;&nbsp;</label>
-					&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchBrands()">
-						<i class="icon-search icon-white"></i>查询
-					</button>				
-			</div>
-			</div>
-		</div>	
-		<div>
-		<table id="BrandTable" class="table table-striped table-bordered table-hover" style="width:99%;" >
-		<thead>
-			<tr>
-				<th>品牌名称</th>
-				<th>品牌级别</th>
-				<th>备注</th>	
-				<th>操作</th>
-			</tr>
-		</thead>
-		 <tbody id="brandList">			
-		</tbody> 
-	</table>
-	</div>
-	</div>
-			</div><!-- /.main-container-inner -->
+						<div><div style="padding:10px" >		
+							<div class="col-xs-12">
+							<div class="col-sm-6" style="text-align: left;">
+									<button class="btn btn-xs btn-primary" onclick="addClass()">
+										<i class="icon-plus-sign icon-white"></i>添加
+									</button>&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+							<div class="col-sm-6" style="text-align: left;">
+									<label >分类名称：
+										<input type="text" style="width: 85px" id="ClassNameS" value="">&nbsp;&nbsp;</label>
+									&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchClass()">
+										<i class="icon-search icon-white"></i>查询
+									</button>				
+							</div>
+							</div>
+						</div>	
+						<div>
+						<table class="table table-striped table-bordered table-hover" style="width:99%;" >
+						<thead>
+							<tr>
+								<th>分类名称</th>
+								<th>备注</th>	
+								<th>操作</th>
+							</tr>
+						</thead>
+						 <tbody id="ClassList">			
+						</tbody> 
+					</table>
+					</div>
+					</div>
+						
+			  </div><!-- /.main-container-inner -->
 
 		</div><!-- /.main-container -->
 <!--
 	作者：1059487328@qq.com
 	时间：2018-03-05
-	描述：添加品牌对话框
--->
-<div id="addBrand_dia" class="modal fade" tabindex="-1">
+	描述：添加分类
+-->		
+<div id="addClass_dia" class="modal fade" tabindex="-1">
 <div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header no-padding">
@@ -252,13 +226,12 @@
 						</div>
 					</div>
 					<div class="modal-body padding-12" >
-						<p style="line-height: 20px;" >品牌名称：&nbsp;&nbsp;<input id ="addBrand_name" value="" /></p>
-						<p>品牌级别：&nbsp;&nbsp;<input id="addBrand_level" value="" /></p>
-						<p>品牌备注：&nbsp;&nbsp;<input id="addBrand_remark" value="" /></p>
+						<p style="line-height: 20px;" >分类名称：&nbsp;&nbsp;<input id ="addClass_name" value="" /></p>
+						<p>备注信息：&nbsp;&nbsp;<input id="addClass_remark" value="" /></p>
 						
 					</div>
 					<div class="modal-footer no-margin-top">
-						<button class="btn btn-sm btn-info pull-right" onclick="addBrand_dia_save()">
+						<button class="btn btn-sm btn-info pull-right" onclick="addClass_dia_save()">
 							<i class="icon-save"></i>
 							Save
 						</button>
@@ -269,9 +242,9 @@
 <!--
 	作者：1059487328@qq.com
 	时间：2018-03-05
-	描述：修改窗口
+	描述：修改
 -->
-<div id="updBrand_dia" class="modal fade" tabindex="-1">
+<div id="updClass_dia" class="modal fade" tabindex="-1">
 <div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header no-padding">
@@ -283,26 +256,23 @@
 						</div>
 					</div>
 					<div class="modal-body padding-12" >
-						<input type="hidden" id="updBrand_id"  value=""/>
-						<p style="line-height: 20px;" >品牌名称：&nbsp;&nbsp;
-							<input readonly="readonly" id ="updBrand_name" value="" /></p>
-						<p>品牌级别：&nbsp;&nbsp;<input id="updBrand_level" value="" /></p>
-						<p>品牌备注：&nbsp;&nbsp;<input id="updBrand_remark" value="" /></p>
+						<input type="hidden" id="updClass_id"  value=""/>
+						<p style="line-height: 20px;" >分类名称：&nbsp;&nbsp;<input id ="updClass_name" value="" /></p>
+						<p>备注信息：&nbsp;&nbsp;<input id="updClass_remark" value="" /></p>
 					</div>
 					<div class="modal-footer no-margin-top">
-						<button class="btn btn-sm btn-info pull-right" onclick="updBrand_dia_save()">
+						<button class="btn btn-sm btn-info pull-right" onclick="updClass_dia_save()">
 							<i class="icon-save"></i>
 							Save
 						</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
-</div>
-
-
-		
+</div>	
+	
+	
 		<script src="assets/js/jquery-2.0.3.min.js"></script>
-		<script src="js/brand.js"></script>
+		<script src="js/class.js"></script>
 
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");

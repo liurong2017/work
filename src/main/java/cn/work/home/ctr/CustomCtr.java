@@ -39,9 +39,17 @@ public class CustomCtr extends BaseController {
             Boolean result= customService.add(custom);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }
+
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @ResponseBody
+    public ModelMap getById(Long id){
+            return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,customService.getById(id));
+    }
+
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
@@ -60,6 +68,7 @@ public class CustomCtr extends BaseController {
             Boolean result= customService.update(custom);
             return retResult(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,"修改成功");
         }catch (Exception e){
+            e.printStackTrace();
             return retResult(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG,e.getMessage());
         }
     }

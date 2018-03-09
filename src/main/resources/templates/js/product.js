@@ -27,6 +27,8 @@ $(function(){
 						+"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv_p");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#ProductList").html(h)
 		}
 	});
@@ -70,6 +72,10 @@ $(function(){
 	
 })
 
+
+function switchPage(divid,pageNo){
+	searchProducts(pageNo,20);
+}
 
 function addProduct(){
 	$("#addProduct_dia").modal("show");
@@ -334,7 +340,7 @@ function updProduct_dia_save(){
 		}
 	});
 }
-function searchProducts(){
+function searchProducts(pageNo,pageSize){
 	var name=$("#ProductNameS").val();
 	var brandId=$("#ProductBrandS").val();
 	var classID=$("#ProductClassS").val();
@@ -348,9 +354,7 @@ function searchProducts(){
 	if(classID.length>0){
 		param+="&classifyId="+classID;
 	}
-	if(param.length==0){
-		return;
-	}
+	param+="&pageNo="+pageNo+"&pageSize="+pageSize
 	param=param.substr(1,param.length);
 		$.ajax({
 		url:"/product/list",
@@ -382,6 +386,8 @@ function searchProducts(){
 						+"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv_p");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#ProductList").html(h)
 			
 		}

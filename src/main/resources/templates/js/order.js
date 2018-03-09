@@ -40,10 +40,16 @@ $(function(){
 									"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#orderList").html(h)
 		}
 	});
 })
+
+function switchPage(divid,pageNo){
+	searchorders(pageNo,20);
+}
 function refreshList(){
 	$("#cnameSearch").val("");
 	$("#mobileSearch").val("");
@@ -90,12 +96,14 @@ function refreshList(){
 									"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#orderList").html(h)
 		}
 	});
 }
 
-function searchorders(){
+function searchorders(pageNo,pageSize){
 	var cname=$("#cnameSearch").val();
 	var mobile=$("#mobileSearch").val();
 	var pname=$("#pnameSearch").val();
@@ -122,11 +130,8 @@ function searchorders(){
 	if(timeEnd.length>0){
 		param+="&timeEnd="+timeEnd;
 	}
-	if(param.length>0){
-		param=param.substr(1,param.length)
-	}else{
-		return
-	}
+	param+="&pageNo="+pageNo+"&pageSize="+pageSize
+	param=param.substr(1,param.length)
 
 	
 		$.ajax({
@@ -170,6 +175,8 @@ function searchorders(){
 									"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#orderList").html(h)
 			
 		}

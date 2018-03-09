@@ -1,4 +1,5 @@
 $(function(){
+	
 	$.ajax({
 		url:"/custom/list",
 		type:"GET",
@@ -28,7 +29,11 @@ $(function(){
 									"<i class=\"icon-edit icon-white\"></i>下单</button>"			
 									+"</td></tr>"
 				}
+				//加载分页信息
+				
 			}
+			var obj=$("#pageDiv");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#CustomList").html(h)
 		}
 	});
@@ -142,7 +147,11 @@ function updCustom_dia_save(){
 		}
 	});
 }
-function searchCustoms(){
+function switchPage(divid,pageNo){
+	searchCustoms(pageNo,20);
+}
+
+function searchCustoms(pageNo,pageSize){
 	var name=$("#CustomNameS").val();
 	var mobile=$("#CustomMobileS").val();
 	var wc=$("#CustomWechatCodeS").val();
@@ -165,9 +174,7 @@ function searchCustoms(){
 	if(souece.length>0){
 		param+="&source="+source
 	}
-	if(param.length==0){
-		return;
-	}
+	param+="&pageNo="+pageNo+"&pageSize="+pageSize
 	param=param.substring(1,param.length);
     $("#CustomList").html("")
 		$.ajax({
@@ -201,6 +208,8 @@ function searchCustoms(){
 									+"</td></tr>"
 				}
 			}
+			var obj=$("#pageDiv");
+	        PagingManage(obj,info.result.totalRecords,info.result.pageSize,info.result.pageNo);
 			$("#CustomList").html(h)
 			
 		}

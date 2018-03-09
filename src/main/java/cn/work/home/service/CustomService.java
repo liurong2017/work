@@ -27,8 +27,10 @@ public class CustomService {
 
     @Transactional
     public Boolean add(Custom custom)throws Exception{
-        Custom old=customMapper.getByWechat(custom.getWechatName());
-        if(old!=null){
+
+
+        List<Custom> old=customMapper.selectByCondition(custom);
+        if(old!=null&&old.size()>0){
             throw new Exception("客户已经存在");
         }
         custom.setAddTime(new Date());

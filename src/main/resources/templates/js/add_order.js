@@ -174,11 +174,12 @@ function addMore(){
 			var item=info.result;
 			var inner="";
 			if(item!=null&&item.length>0){
+				var num=$("#addOrder_productList").children().length;
 				for(var x=0;x<item.length;x++){
-					inner+="<tr id=\"pList_tr_"+x+"\"><td><input type=\"hidden\" id=\"pList_id_"+x+"\" value=\""+item[x].id+"\" />"
-			       +"<input  id=\"pList_name_"+x+"\" value=\""+item[x].name+"\" readonly=\"readonly\" /></td>"+
-						"<td><input name='pList_item' id=\"pList_num_"+x+"\" value=\"\" /></td>"+
-						"<td><input  name='pList_item' id=\"pList_totalPrice_"+x+"\" value=\"\" /></td>"+
+					inner+="<tr id=\"pList_tr_"+(num+x)+"\"><td><input type=\"hidden\" id=\"pList_id_"+(num+x)+"\" value=\""+item[x].id+"\" />"
+			       +"<input  id=\"pList_name_"+(num+x)+"\" value=\""+item[x].name+"\" readonly=\"readonly\" /></td>"+
+						"<td><input name='pList_item' id=\"pList_num_"+(num+x)+"\" value=\"\" /></td>"+
+						"<td><input  name='pList_item' id=\"pList_totalPrice_"+(num+x)+"\" value=\"\" /></td>"+
 						"<td><button class=\"btn btn-xs btn-info\" onclick=\"removeOne("+item[x].id+")\">"
 						+"<i class=\"icon-remove icon-white\"></i>移除</button>"
 						+"</td></tr>"

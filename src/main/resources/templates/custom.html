@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+		<link href="css/page.css"  rel="stylesheet"/>
 
 
 		<script src="assets/js/ace-extra.min.js"></script>
@@ -192,7 +193,7 @@
 										<input type="text" placeholder="来源" style="width: 85px" id="CustomSourceS" value="">&nbsp;&nbsp;
 			
 										</label>
-										&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchCustoms()">
+										&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchCustoms(1,10)">
 											<i class="icon-search icon-white"></i>查询
 										</button>				
 								</div>
@@ -219,6 +220,9 @@
 							 <tbody id="CustomList">			
 							</tbody> 
 						</table>
+						<p >
+							<div class="page_div" id="pageDiv"></div>
+						</p>
 						</div>
 						</div>
 			</div>
@@ -306,10 +310,10 @@
 			</div><!-- /.modal-dialog -->
 </div>
 
-
 		
   <script src="assets/js/jquery-2.0.3.min.js"></script>
 		<script src="js/custom.js"></script>
+		<script src="js/page.js"></script>
 
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");

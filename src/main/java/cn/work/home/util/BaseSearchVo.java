@@ -8,7 +8,7 @@ package cn.work.home.util;
 public class BaseSearchVo {
 
     private  int pageNo=1;
-    private  int pageSize=10;
+    private  int pageSize=20;
 
     public int getPageNo() {
         return pageNo;

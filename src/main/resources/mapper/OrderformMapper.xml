@@ -35,6 +35,7 @@
       <if test="mobile!=null"> and c.mobile like CONCAT('%', #{mobile},'%') </if>
       <if test="pname!=null"> and p.`name` like CONCAT('%', #{pname},'%') </if>
       <if test="source!=null">and f.source = #{source}</if>
+      <if test="status!=null">and f.status = #{status}</if>
       <if test="timeStart!=null">and f.add_time &gt;= #{timeStart}	</if>
       <if test="timeEnd!=null">and f.add_time &lt;= #{timeEnd}	</if>
     </where>

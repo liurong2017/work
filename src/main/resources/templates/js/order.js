@@ -124,6 +124,9 @@ function searchorders(pageNo,pageSize){
 	if(source.length>0){
 		param+="&source="+source;
 	}
+	if(status.length>0){
+		param+="&status="+status;
+	}
 	if(timeStart.length>0){
 		param+="&timeStart="+timeStart;
 	}

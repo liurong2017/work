@@ -34,6 +34,8 @@ public class Product {
 
     @Column(name = "add_time")
     private Date addTime;
+    @Column(name = "upd_time")
+    private Date updTime;
 
 
     private String remark;
@@ -42,6 +44,14 @@ public class Product {
     @Transient
     private BigDecimal cost;//进货成本
 
+
+    public Date getUpdTime() {
+        return updTime;
+    }
+
+    public void setUpdTime(Date updTime) {
+        this.updTime = updTime;
+    }
 
     public BigDecimal getCost() {
         return cost;

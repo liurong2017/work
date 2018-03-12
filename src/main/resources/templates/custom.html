@@ -179,12 +179,9 @@
 						</div><!-- /.page-header -->
 						<div><div style="padding:10px" >		
 								<div class="col-xs-12">
-								<div class="col-sm-6" style="text-align: left;">
 										<button class="btn btn-xs btn-primary" onclick="addCustom()">
 											<i class="icon-plus-sign icon-white"></i>添加
-										</button>&nbsp;&nbsp;&nbsp;&nbsp;
-								</div>
-								<div class="col-sm-6" style="text-align: left;">
+										</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<label >
 										<input type="text" placeholder="姓名" style="width: 85px" id="CustomNameS" value="">&nbsp;&nbsp;
 										<input type="text" placeholder="电话" style="width: 85px" id="CustomMobileS" value="">&nbsp;&nbsp;
@@ -196,7 +193,6 @@
 										&nbsp;&nbsp;<button class="btn btn-xs btn-info" onclick="searchCustoms(1,10)">
 											<i class="icon-search icon-white"></i>查询
 										</button>				
-								</div>
 								</div>
 							</div>	
 							<div>
@@ -252,7 +248,13 @@
 						</select></p>
 						<p>客户电话：&nbsp;&nbsp;<input name="add_custom" id="addCustom_mobile" value="" /></p>
 						<p>客户来源：&nbsp;&nbsp;<input name="add_custom" id="addCustom_source" value="" placeholder="微信、淘宝、QQ"/></p>
-						<p>客户级别：&nbsp;&nbsp;<input name="add_custom" id="addCustom_level" value="" /></p>
+						<p>客户级别：&nbsp;&nbsp;<select name="add_custom" id="addCustom_level" >
+							<option value="1">1</option>
+							<option value="2" selected="selected">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select></p>
 						<p>微信号码：&nbsp;&nbsp;<input name="add_custom" id="addCustom_wechatCode" value="" /></p>
 						<p>微信昵称：&nbsp;&nbsp;<input name="add_custom" id="addCustom_wechatName" value="" /></p>
 						<p>收货地址1：&nbsp;&nbsp;<textarea name="add_custom" id="addCustom_address1" value="" ></textarea></p>
@@ -293,7 +295,13 @@
 						</select></p>
 						<p>客户电话：&nbsp;&nbsp;<input name="upd_custom" id="updCustom_mobile" value="" /></p>
 						<p>客户来源：&nbsp;&nbsp;<input name="upd_custom" id="updCustom_source" value="" /></p>
-						<p>客户级别：&nbsp;&nbsp;<input name="upd_custom" id="updCustom_level" value="" /></p>
+						<p>客户级别：&nbsp;&nbsp;<select name="upd_custom" id="updCustom_level" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select></p>
 						<p>微信号码：&nbsp;&nbsp;<input name="updcustom" id="updCustom_wechatCode" value="" /></p>
 						<p>微信昵称：&nbsp;&nbsp;<input name="upd_custom" id="updCustom_wechatName" value="" /></p>
 						<p>收货地址1：&nbsp;&nbsp;<textarea name="upd_custom" id="updCustom_address1" value="" ></textarea></p>

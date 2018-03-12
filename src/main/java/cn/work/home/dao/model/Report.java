@@ -25,8 +25,17 @@ public class Report {
 
     private Date time;
 
+    private int flag;
+
     private String remark;
 
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public Long getId() {
         return id;

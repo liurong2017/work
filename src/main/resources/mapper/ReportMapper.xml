@@ -12,9 +12,11 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <delete id="deleteByOidAndPid">
-    DELETE  FROM report where pid= #{pid} and oid=#{oid}
-  </delete>
+  <update id="deleteByOidAndPid">
+    UPDATE  report SET flag=0
+     where pid= #{pid} and oid=#{oid} and price=#{price}
+  </update>
 </mapper>

@@ -118,6 +118,8 @@ public class OrderService {
 
     @Transactional
     public  Boolean returnOrder(Long id,String remark)throws Exception{
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:ss:mm");
+        Date now=new Date();
         Orderform old=orderformMapper.getById(id);
         if(old==null){
             throw new Exception("订单不存在");
@@ -132,8 +134,21 @@ public class OrderService {
                 upd.setStock(product.getStock()+detail.getNum());
                 upd.setId(product.getId());
                 productMapper.updateByPrimaryKeySelective(upd);
-                //删除收入记录
-                reportMapper.deleteByOidAndPid(id,detail.getPid());
+                //增加一条退货支出记录
+
+                Report report=new Report();
+                report.setOid(id);
+                report.setPrice(detail.getTotalPrice());
+                report.setPid(detail.getPid());
+                report.setContent(simpleDateFormat.format(now)+"退货");
+                report.setType("0");//支出
+                report.setTime(now);
+                report.setFlag(0);
+                reportMapper.insertSelective(report);
+                //标记以前的订单为0;
+                reportMapper.deleteByOidAndPid(id,detail.getPid(),detail.getTotalPrice());
+
+//                reportMapper.
             }
         }
         Orderform upd=new Orderform();

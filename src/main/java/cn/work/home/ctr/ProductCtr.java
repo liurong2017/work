@@ -7,6 +7,7 @@ import cn.work.home.service.ProductService;
 import cn.work.home.util.PageResult;
 import cn.work.home.util.ResultCode;
 import cn.work.home.vo.CustomVo;
+import cn.work.home.vo.ProductListVo;
 import cn.work.home.vo.ProductVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,8 @@ public class ProductCtr extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public ModelMap getList(ProductVo productVo){
-        List<Product> list=productService.getList(productVo);
-        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        List<ProductListVo> list=productService.getList(productVo);
+        PageInfo<ProductListVo> pageInfo = new PageInfo<>(list);
         PageResult pageResult = new PageResult(productVo.getPageSize(),productVo.getPageNo(), pageInfo.getList(),pageInfo.getPages(), pageInfo.getTotal(), null);
         return retResult("200","200",pageResult);
     }

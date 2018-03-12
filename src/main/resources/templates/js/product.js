@@ -11,13 +11,16 @@ $(function(){
 			var list=info.result.records;
 			if(list!=null&&list.length>0){
 				for (var x=0;x<list.length;x++) {
-					h+="<tr><td>"+list[x].brandName+"</td>"+
+					h+="<tr>"+
+					     "<td>"+list[x].name+"</td>"+
 						"<td>"+list[x].classifyName+"</td>"+
-						"<td>"+list[x].name+"</td>"+
+						"<td>"+list[x].brandName+"</td>"+
 						"<td>"+list[x].status+"</td>"+
 						"<td>"+list[x].level+"</td>"+
 						"<td>"+list[x].marketPrice+"</td>"+
 						"<td>"+list[x].stock+"</td>"+
+						"<td>"+list[x].totalCost+"</td>"+
+						"<td>"+list[x].totalIncome+"</td>"+
 						"<td>"+new Date(list[x].addTime).toLocaleString().replace(/\//g, "-")+"</td>"+
 						"<td>"+list[x].remark+"</td>"+
 						"<td><button class=\"btn btn-xs btn-info\" onclick=\"updProduct("+list[x].id+")\">"
@@ -344,6 +347,7 @@ function searchProducts(pageNo,pageSize){
 	var name=$("#ProductNameS").val();
 	var brandId=$("#ProductBrandS").val();
 	var classID=$("#ProductClassS").val();
+	var level=$("#levelSearch").val();
 	var param="";
 	if(name.length>0){
 		param+="&name="+name;
@@ -354,6 +358,10 @@ function searchProducts(pageNo,pageSize){
 	if(classID.length>0){
 		param+="&classifyId="+classID;
 	}
+	if(level.length>0){
+		param+="&level="+level;
+	}
+	
 	param+="&pageNo="+pageNo+"&pageSize="+pageSize
 	param=param.substr(1,param.length);
 		$.ajax({
@@ -370,13 +378,16 @@ function searchProducts(pageNo,pageSize){
 			var list=info.result.records;
 			if(list!=null&&list.length>0){
 				for (var x=0;x<list.length;x++) {
-					h+="<tr><td>"+list[x].brandName+"</td>"+
+					h+="<tr>"+
+					     "<td>"+list[x].name+"</td>"+
 						"<td>"+list[x].classifyName+"</td>"+
-						"<td>"+list[x].name+"</td>"+
+						"<td>"+list[x].brandName+"</td>"+
 						"<td>"+list[x].status+"</td>"+
 						"<td>"+list[x].level+"</td>"+
 						"<td>"+list[x].marketPrice+"</td>"+
 						"<td>"+list[x].stock+"</td>"+
+						"<td>"+list[x].totalCost+"</td>"+
+						"<td>"+list[x].totalIncome+"</td>"+
 						"<td>"+new Date(list[x].addTime).toLocaleString().replace(/\//g, "-")+"</td>"+
 						"<td>"+list[x].remark+"</td>"+
 						"<td><button class=\"btn btn-xs btn-info\" onclick=\"updProduct("+list[x].id+")\">"

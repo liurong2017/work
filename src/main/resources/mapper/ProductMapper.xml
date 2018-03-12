@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.work.home.dao.mapper.ProductMapper">
   <resultMap id="BaseResultMap" type="cn.work.home.dao.model.Product">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="brand_Name" jdbcType="VARCHAR" property="brandName" />
@@ -18,6 +15,25 @@
     <result column="stock" jdbcType="INTEGER" property="stock" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap_list" type="cn.work.home.vo.ProductListVo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="brand_Name" jdbcType="VARCHAR" property="brandName" />
+    <result column="classify_id" jdbcType="BIGINT" property="classifyId" />
+    <result column="classify_name" jdbcType="VARCHAR" property="classifyName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="upd_time" jdbcType="TIMESTAMP" property="updTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="totalCost" jdbcType="DECIMAL" property="totalCost" />
+    <result column="totalIncome" jdbcType="DECIMAL" property="totalIncome" />
   </resultMap>
   <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name from product p
@@ -46,18 +62,21 @@
     <if test="flag==1"> stock = stock + #{stock} where id=#{id}</if>
   </update>
 
-  <select id="selectByCondition" resultMap="BaseResultMap">
-    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name  from product p
+  <select id="selectByCondition" resultMap="BaseResultMap_list">
+    SELECT p.* ,b.`name` as brand_name,c.`name` as classify_name ,IFNULL(tc.totalCost,0) as totalCost ,IFNULL(ti.totalIncome,0) as totalIncome   from product p
     LEFT JOIN brand b on b.id =p.brand_id
     LEFT  join classify c on c.id =p.classify_id
+    LEFT  JOIN  (SELECT r.pid,r.type, sum(r.price) as totalCost from report r where r.type='0' and r.flag=1 GROUP BY r.pid ) tc on tc.pid= p.id
+    LEFT  JOIN  (SELECT r.pid,r.type, sum(r.price) as totalIncome from report r where r.type='1' and r.flag=1 GROUP BY r.pid) ti on ti.pid= p.id
     <where>
       1=1
       <if test="brandId!=null"> and  p.brand_id =#{brandId}</if>
       <if test="classifyId!=null"> and p.classify_id=#{classifyId}</if>
       <if test="status !=null"> and p.status=#{status}</if>
+      <if test="level !=null"> and p.level=#{level}</if>
       <if test="name !=null"> and p.`name` like CONCAT('%', #{name},'%')</if>
     </where>
-
+    order by p.upd_time desc
   </select>
 
 </mapper>

@@ -4,6 +4,7 @@ import cn.work.home.dao.mapper.ProductMapper;
 import cn.work.home.dao.mapper.ReportMapper;
 import cn.work.home.dao.model.Product;
 import cn.work.home.dao.model.Report;
+import cn.work.home.vo.ProductListVo;
 import cn.work.home.vo.ProductVo;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
@@ -72,7 +73,7 @@ public class ProductService {
         return  i>0;
     }
 
-    public List<Product> getList(ProductVo productVo){
+    public List<ProductListVo> getList(ProductVo productVo){
         PageHelper.startPage(productVo.getPageNo(),productVo.getPageSize());
         Product search=new Product();
         BeanUtils.copyProperties(productVo,search);
